@@ -1,12 +1,31 @@
+h1 {
+    font-size: 3rem;
+}
+
 #display {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
-    
 }
 
 .drum-pad {
-    padding: 10px;
+    padding: 40px;
     margin: 10px;
-    border: 5px solid black;
+    border-radius: 50%;
+    border: 5px double black;
+    cursor: pointer;
+    font-size: 2rem;
+}
+
+.drum-pad:hover {
+    color: #f4f8e8;
+    background-color: #d2380a;
+}
+
+footer {
+    margin-top: 40px;
+}
+
+a {
+    color: black;
 }
