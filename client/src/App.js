@@ -8,10 +8,12 @@ class App extends React.Component {
     super();
   }
 
+  drumPads = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
+
   render(){
     return <main id="drum-machine">
       <h1>Drum Machine</h1>
-      <Drum />
+      <Drum pads={this.drumPads}/>
       <Footer />
     </main>;
   }
