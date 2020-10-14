@@ -9,8 +9,15 @@ class App extends React.Component {
     this.play = this.play.bind(this);
   }
 
-  play(event){
-    const pad = event.target.firstChild;
+  componentDidMount(){
+    document.addEventListener('keydown', event => this.play(document.getElementById(event.key.toUpperCase())));
+  }
+
+  play(element){
+    if(!element){
+      return;
+    }
+    const pad = (element.target && element.target.firstChild) || element;
     pad.play();
   }
 
