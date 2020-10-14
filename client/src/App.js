@@ -6,6 +6,12 @@ import Footer from './components/Footer.js';
 class App extends React.Component {
   constructor(){
     super();
+    this.play = this.play.bind(this);
+  }
+
+  play(event){
+    const pad = event.target.firstChild;
+    pad.play();
   }
 
   drumPads = ['Q', 'W', 'E', 'A', 'S', 'D', 'Z', 'X', 'C'];
@@ -13,7 +19,7 @@ class App extends React.Component {
   render(){
     return <main id="drum-machine">
       <h1>Drum Machine</h1>
-      <Drum pads={this.drumPads}/>
+      <Drum pads={this.drumPads} playClip={this.play}/>
       <Footer />
     </main>;
   }

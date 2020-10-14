@@ -3,7 +3,7 @@ import DrumPad from './DrumPad.js'
 
 function Drum(props){
     return <section id="display">
-        {props.pads.map(pad => <DrumPad pad={pad}/>)}
+        {props.pads.map(pad => <DrumPad key={pad} pad={pad} playClip={props.playClip}/>)}
     </section>;
 }
 
