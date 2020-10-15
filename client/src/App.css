@@ -2,10 +2,15 @@ h1 {
     font-size: 3rem;
 }
 
-#display {
+#drum-pads {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
+    margin: 30px;
+}
+
+#display {
+    font-size: 2.5rem;
 }
 
 .drum-pad {
@@ -17,7 +22,7 @@ h1 {
     font-size: 2rem;
 }
 
-.drum-pad:hover {
+.drum-pad:hover, .drum-keydown {
     color: #f4f8e8;
     background-color: #d2380a;
 }
@@ -29,3 +34,14 @@ footer {
 a {
     color: black;
 }
+
+@media only screen and (max-width: 600px) {
+    .drum-pad {
+        padding: 15px;
+        margin: 5px;
+    }
+
+    #display {
+        font-size: 1.5rem;
+    }
+  }
