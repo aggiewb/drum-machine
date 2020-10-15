@@ -51,7 +51,7 @@ it('should render DrumPad component with span and audio elements', () => {
   const EXPECTED_AUDIO_PATH = `${EXPECTED_PAD}-drum.mp3`;
   const EXPECTED_SPAN_ID = `${EXPECTED_PAD}-pad`;
 
-  const drumPad = mount(<DrumPad key={EXPECTED_PAD} pad={EXPECTED_PAD} playClip={jest.fn()}/>);
+  const drumPad = shallow(<DrumPad key={EXPECTED_PAD} pad={EXPECTED_PAD}/>);
   const span = drumPad.find('span');
   const audio = drumPad.find('audio');
 
@@ -60,6 +60,4 @@ it('should render DrumPad component with span and audio elements', () => {
   
   expect(audio.prop('id')).toEqual(EXPECTED_PAD);
   expect(audio.prop('src')).toEqual(EXPECTED_AUDIO_PATH);
-
-  expect(drumPad.prop('playClip')).toBeDefined();
 });
