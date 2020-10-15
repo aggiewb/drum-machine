@@ -38,12 +38,12 @@ class App extends React.Component {
     Q: 'bwohm', 
     W: 'bwahm', 
     E: 'bwaah', 
-    A: 'doeh', 
-    S: 'dooeh',
-    D: 'doooeh', 
-    Z: 'dooooeh', 
-    X: 'doooooeh', 
-    C: 'dooooooeh'
+    A: 'gong', 
+    S: 'goong',
+    D: 'gooong', 
+    Z: 'goooong', 
+    X: 'gooooong', 
+    C: 'goooooong'
   };
   
   render(){
