@@ -20,6 +20,7 @@ const EXPECTED_DRUM_PADS = {
   C: 'goooooong'
 };
 const EXPECTED_DRUM_PADS_KEYS = Object.keys(EXPECTED_DRUM_PADS);
+const EXPECTED_PAD = EXPECTED_DRUM_PADS_KEYS[0];
 
 it('App deeply renders as a smoke test', () => {
   mount(<App />);
@@ -44,4 +45,21 @@ it('should be able to call playClip on click of span element in DrumPad', () => 
 
   span.simulate('click');
   expect(playClip).toHaveBeenCalled();
+});
+
+it('should render DrumPad component with span and audio elements', () => {
+  const EXPECTED_AUDIO_PATH = `${EXPECTED_PAD}-drum.mp3`;
+  const EXPECTED_SPAN_ID = `${EXPECTED_PAD}-pad`;
+
+  const drumPad = mount(<DrumPad key={EXPECTED_PAD} pad={EXPECTED_PAD} playClip={jest.fn()}/>);
+  const span = drumPad.find('span');
+  const audio = drumPad.find('audio');
+
+  expect(span.text()).toEqual(EXPECTED_PAD);
+  expect(span.prop('id')).toEqual(EXPECTED_SPAN_ID);
+  
+  expect(audio.prop('id')).toEqual(EXPECTED_PAD);
+  expect(audio.prop('src')).toEqual(EXPECTED_AUDIO_PATH);
+
+  expect(drumPad.prop('playClip')).toBeDefined();
 });
