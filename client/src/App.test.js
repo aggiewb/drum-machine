@@ -21,6 +21,8 @@ const EXPECTED_DRUM_PADS = {
 };
 const EXPECTED_DRUM_PADS_KEYS = Object.keys(EXPECTED_DRUM_PADS);
 const EXPECTED_PAD = EXPECTED_DRUM_PADS_KEYS[0];
+const EXPECTED_SPAN_ID = `${EXPECTED_PAD}-pad`;
+ document.body.innerHTML = `<p id="display"></p>`;
 
 it('App deeply renders as a smoke test', () => {
   mount(<App />);
@@ -49,8 +51,7 @@ it('should be able to call playClip on click of span element in DrumPad', () => 
 
 it('should render DrumPad component with span and audio elements', () => {
   const EXPECTED_AUDIO_PATH = `${EXPECTED_PAD}-drum.mp3`;
-  const EXPECTED_SPAN_ID = `${EXPECTED_PAD}-pad`;
-
+  
   const drumPad = shallow(<DrumPad key={EXPECTED_PAD} pad={EXPECTED_PAD}/>);
   const span = drumPad.find('span');
   const audio = drumPad.find('audio');
@@ -66,4 +67,20 @@ it('should call App class play() method passing in a null value', () => {
   const app = shallow(<App />);
   const play = app.instance().play(null);
   expect(play).toBeUndefined();
+});
+
+it('should call App class play() method passing in an event object', () => {
+  const app = shallow(<App />);
+  const audio = {
+    play: jest.fn()
+  }
+  
+  app.instance().play({
+    target: {
+      id: EXPECTED_SPAN_ID,
+      firstChild: audio
+    }
+  });
+
+  expect(audio.play).toHaveBeenCalled();
 });
