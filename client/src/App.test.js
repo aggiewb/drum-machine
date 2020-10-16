@@ -61,3 +61,9 @@ it('should render DrumPad component with span and audio elements', () => {
   expect(audio.prop('id')).toEqual(EXPECTED_PAD);
   expect(audio.prop('src')).toEqual(EXPECTED_AUDIO_PATH);
 });
+
+it('should call App class play() method passing in a null value', () => {
+  const app = shallow(<App />);
+  const play = app.instance().play(null);
+  expect(play).toBeUndefined();
+});
