@@ -22,7 +22,7 @@ const EXPECTED_DRUM_PADS = {
 const EXPECTED_DRUM_PADS_KEYS = Object.keys(EXPECTED_DRUM_PADS);
 const EXPECTED_PAD = EXPECTED_DRUM_PADS_KEYS[0];
 const EXPECTED_SPAN_ID = `${EXPECTED_PAD}-pad`;
- document.body.innerHTML = `<p id="display"></p>`;
+document.body.innerHTML = `<p id="display"></p><span id=${EXPECTED_SPAN_ID}></span>`;
 
 it('App deeply renders as a smoke test', () => {
   mount(<App />);
@@ -73,7 +73,7 @@ it('should call App class play() method passing in an event object', () => {
   const app = shallow(<App />);
   const audio = {
     play: jest.fn()
-  }
+  };
   
   app.instance().play({
     target: {
@@ -83,4 +83,20 @@ it('should call App class play() method passing in an event object', () => {
   });
 
   expect(audio.play).toHaveBeenCalled();
+});
+
+it('should call App class play() method passing in a DOM element', () => {
+  const app = shallow(<App />);
+  jest.useFakeTimers();
+  
+  const audio = jest.fn();
+  
+  app.instance().play({
+    id: EXPECTED_PAD,
+    play: audio
+  });
+
+  jest.advanceTimersByTime(100);
+
+  expect(audio).toHaveBeenCalled();
 });
