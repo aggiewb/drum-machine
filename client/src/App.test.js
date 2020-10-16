@@ -40,13 +40,27 @@ it('should render App class child components, and initialize their props', () =>
   expect(footer.exists()).toEqual(true);
 });
 
-it('should be able to call playClip on click of span element in DrumPad', () => {
+it('should call playClip on click of span element in DrumPad', () => {
   const playClip = jest.fn();
   const drumPad = shallow(<DrumPad playClip={playClip}/>);
   const span = drumPad.find('span');
 
   span.simulate('click');
   expect(playClip).toHaveBeenCalled();
+});
+
+it('should call method play on a keydown event', () => {
+  const eventListeners = {};
+  document.addEventListener = (eventName, callback) => {
+    eventListeners[eventName] = callback;
+  };
+
+  const app = shallow(<App />);
+  const spy = jest.spyOn(app.instance(), 'play');
+  
+  eventListeners.keydown({key: 'q'});
+
+  expect(spy).toHaveBeenCalled();
 });
 
 it('should render DrumPad component with span and audio elements', () => {
