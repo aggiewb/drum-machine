@@ -40,6 +40,20 @@ it('should render App class child components, and initialize their props', () =>
   expect(footer.exists()).toEqual(true);
 });
 
+it('should render a Drum component with DrumPad elements', () => {
+  const drum = shallow(<Drum pads={EXPECTED_DRUM_PADS_KEYS}/>);
+  const drumPads = drum.find('DrumPad');
+
+  expect(drumPads).toHaveLength(EXPECTED_DRUM_PADS_KEYS.length);
+  
+  const pads = [];
+  drumPads.forEach(pad => pads.push(pad.prop('pad')));
+  
+  EXPECTED_DRUM_PADS_KEYS.forEach(key => {
+    expect(pads).toContain(key);
+  });
+});
+
 it('should call playClip on click of span element in DrumPad', () => {
   const playClip = jest.fn();
   const drumPad = shallow(<DrumPad playClip={playClip}/>);
